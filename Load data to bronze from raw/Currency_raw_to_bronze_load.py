@@ -23,5 +23,6 @@ write_raw_to_bronze_databricks(df_currency_read,"Currency")
 # COMMAND ----------
 
 # DBTITLE 1,Write Currency Dataframe to Bronze Storage Layer
-# Write Currency Dataframe to Bronze Storage Layer
-# write_raw_to_bronze_adls(df_currency_read,"Currency")
+# MAGIC %skip
+# MAGIC # Write Currency Dataframe to Bronze Storage Layer
+# MAGIC # write_raw_to_bronze_adls(df_currency_read,"Currency")
