@@ -49,6 +49,8 @@ def read_raw_csv_file(entity,entity_schema,file_name):
 def write_raw_to_bronze_databricks(df,table_name):
   df.write \
     .format("delta") \
+    .option("overwriteSchema", "true")\
+    .option("mergeSchema","true")\
     .mode("overwrite") \
     .saveAsTable(f"devsauro.bronze.{table_name}")
 
@@ -62,6 +64,8 @@ def write_raw_to_bronze_databricks(df,table_name):
 # MAGIC   df.write \
 # MAGIC     .format("delta") \
 # MAGIC     .mode("overwrite") \
+# MAGIC     .option("overwriteSchema", "true")\
+# MAGIC     .option("mergeSchema","true")\
 # MAGIC     .save(f"{LOCATION_PATH}/bronze/{table_name}")
 
 # COMMAND ----------
@@ -71,6 +75,8 @@ def write_raw_to_bronze_databricks(df,table_name):
 def write_bronze_to_silver_databricks(df,table_name):
   df.write \
     .format("delta") \
+    .option("overwriteSchema", "true")\
+    .option("mergeSchema","true")\
     .mode("overwrite") \
     .saveAsTable(f"devsauro.silver.{table_name}")
 
@@ -83,4 +89,31 @@ def write_bronze_to_silver_databricks(df,table_name):
 # MAGIC   df.write \
 # MAGIC     .format("delta") \
 # MAGIC     .mode("overwrite") \
+# MAGIC     .option("overwriteSchema", "true")\
+# MAGIC     .option("mergeSchema","true")\
 # MAGIC     .save(f"{LOCATION_PATH}/silver/{table_name}")
+
+# COMMAND ----------
+
+# DBTITLE 1,Write Dataframe to Gold Delta Table in Databricks
+# Write Dataframe to Gold Delta Table in Databricks
+def write_silver_to_gold_databricks(df,table_name):
+  df.write \
+    .format("delta") \
+    .option("overwriteSchema", "true")\
+    .option("mergeSchema","true")\
+    .mode("overwrite") \
+    .saveAsTable(f"devsauro.gold.{table_name}")
+
+# COMMAND ----------
+
+# DBTITLE 1,Save Dataframe to Gold Layer in ADLS as Delta Table
+# MAGIC %skip
+# MAGIC # Save Dataframe to Silver Layer in ADLS as Delta Table
+# MAGIC def write_silver_to_gold_adls(df,table_name):
+# MAGIC   df.write \
+# MAGIC     .format("delta") \
+# MAGIC     .mode("overwrite") \
+# MAGIC     .option("overwriteSchema", "true")\
+# MAGIC     .option("mergeSchema","true")\
+# MAGIC     .save(f"{LOCATION_PATH}/gold/{table_name}")
