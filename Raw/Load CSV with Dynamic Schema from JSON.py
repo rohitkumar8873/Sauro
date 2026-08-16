@@ -95,6 +95,16 @@ def write_bronze_to_silver_databricks(df,table_name):
 
 # COMMAND ----------
 
+def append_write_bronze_to_silver_databricks(df,table_name):
+  df.write \
+    .format("delta") \
+    .option("overwriteSchema", "true")\
+    .option("mergeSchema","true")\
+    .mode("append") \
+    .saveAsTable(f"devsauro.silver.{table_name}")
+
+# COMMAND ----------
+
 # DBTITLE 1,Write Dataframe to Gold Delta Table in Databricks
 # Write Dataframe to Gold Delta Table in Databricks
 def write_silver_to_gold_databricks(df,table_name):
