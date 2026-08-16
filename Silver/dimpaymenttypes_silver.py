@@ -27,10 +27,10 @@ display(salesorderlinedf)
 
 # DBTITLE 1,Create Silver Table for Payment Types in Databricks
 # MAGIC %sql
-# MAGIC CREATE TABLE IF NOT EXISTS devsauro.silver.dimpaymenttypes(
-# MAGIC     PaymentTypeId INT,
-# MAGIC     PaymentTypeDesc STRING
-# MAGIC )
+# MAGIC -- CREATE TABLE IF NOT EXISTS devsauro.silver.dimpaymenttypes(
+# MAGIC --     PaymentTypeId INT,
+# MAGIC --     PaymentTypeDesc STRING
+# MAGIC -- )
 
 # COMMAND ----------
 
@@ -80,8 +80,13 @@ display(isdsFinal)
 
 # COMMAND ----------
 
+# MAGIC %sql
+# MAGIC -- drop table devsauro.silver.dimpaymenttypes_silver
+
+# COMMAND ----------
+
 # DBTITLE 1,Write Final Dataset to Silver Table in Databricks
-write_bronze_to_silver_databricks(isdsFinal,"dimpaymenttypes_silver")
+append_write_bronze_to_silver_databricks(isdsFinal,"dimpaymenttypes_silver")
 
 # COMMAND ----------
 
